@@ -25,7 +25,7 @@ class Length_Col(enum.StrEnum):
 def dict_to_list(data:dict, key_title="key", value_title="value"):
    '''
    ----------------------------------------------------------------------------
-   This function converts a dictionary to a list type.
+   This function converts a dictionary to a list.
    ----------------------------------------------------------------------------
    '''
    my_key_list = []; my_data_list = []
@@ -59,6 +59,11 @@ def dict_to_list(data:dict, key_title="key", value_title="value"):
 #-------------------------------------------------------------------------------------------------------------
 # set and frozenset values are printed in aleatory order all the time
 def set_to_list(data:set|frozenset, header="set",layout:Layout=Layout.VERTICAL):
+   '''
+   ----------------------------------------------------------------------------
+   This function converts a set or a frozenset to a list.
+   ----------------------------------------------------------------------------
+   '''
    tempo_list = []
    #----------------------------------------------------------------------------------
    def set_to_list_get_header():
@@ -104,6 +109,11 @@ def set_to_list(data:set|frozenset, header="set",layout:Layout=Layout.VERTICAL):
 # Convert From Range to List Type                                                                            -
 #-------------------------------------------------------------------------------------------------------------
 def range_to_list(data:range, header = None, layout:Layout=Layout.HORIZONTAL):
+   '''
+   ----------------------------------------------------------------------------
+   This function converts a range to a list.
+   ----------------------------------------------------------------------------
+   '''
    tempo_list = []
 
    def range_to_list_get_header(option="horizontal"):
@@ -136,6 +146,11 @@ def range_to_list(data:range, header = None, layout:Layout=Layout.HORIZONTAL):
 # Convert From Tuple to List Type                                                                            -
 #-------------------------------------------------------------------------------------------------------------
 def tuple_to_list(data:tuple):
+   '''
+   ----------------------------------------------------------------------------
+   This function converts a tuple to a list.
+   ----------------------------------------------------------------------------
+   '''
    tempo_list = []
    #-----------------------------------------------------------------------------------------------
    if (len(data) == 0):
@@ -210,6 +225,11 @@ def tuple_to_list(data:tuple):
 # Conversion Any Data Type To To A List Type                                                                 -
 #-------------------------------------------------------------------------------------------------------------
 def data_to_list(dato):
+   '''
+   ----------------------------------------------------------------------------
+   This function converts a any type of variable to a list type.
+   ----------------------------------------------------------------------------
+   '''
    data_list = []
    
    # list, bool, int, float, complex and string type

@@ -107,10 +107,14 @@ Py_List_Functions -> Name of the Repository
 For all the work                                          For specific work
 git config --global user.name "Migue"                     git config user.name "Migue"
 git config --global user.email "acma.mex@gmail.com"       git config user.email "acma.mex@gmail.com"
+git config -l                                             display all the setting of the GitHud repository
 git clone  <path of the url>
 git push   -> to push to the repository (provide username and password)
 
-
+Support for password authentication was removed on August 13, 2021. -> Issue
+Solve the issue: Settings->Developer Settings-> Personal Access Token-> Tokens(classic)->
+                 Generate New Token-> Generate New Token (classic)-> Fiilup the form->
+                 Click Generate Token: This is the password you need to push and pull
 
 GitLab
 

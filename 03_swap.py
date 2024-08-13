@@ -28,7 +28,7 @@ print("new list: ",newlist)
 print("original: ", lst)
 '''
 ----------------------------------------------------------------------------
-   import fancylist as lf
+   import list_functions as lf
 
    This function swaps two elements in a list.
 

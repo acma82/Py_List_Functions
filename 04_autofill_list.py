@@ -16,7 +16,7 @@ print(msg)
 
 lst = [[9,8,7],[4],[5,6]]
 print("Original:",lst)
-result = lf.autofill_data(lst, fill_value=9.8, type= "number", update=False)
+result = lf.autofill_data(lst, fill_value=9.8, type= lf.Fill_Type.NUMBER, update=False)
 print("mylist=lst, fill_value=9.8, type= \"number\", update=False")
 print("Result  :",result)
 print("Original:",lst)
@@ -25,7 +25,7 @@ print("\n-----------------------------------------------------------------------
 
 print("Original:",lst)
 result = lf.autofill_data(my_list=lst, fill_value=99, type=lf.Fill_Type.STRING, update=True)
-print("mylist=lst, fill_value=99, type= \"number\", update=True")
+print("mylist=lst, fill_value=99, type= \"string\", update=True")
 print("Result  :",result)
 print("Original:",lst)
 
@@ -40,10 +40,19 @@ print("Original:",lst)
    fill_chr is the chr to be used to fill those columns. It can be str,
    int, float, or bool. By default it's a str type (----).
 
-   example:
+example:
+   lst = [[9,8,7],[4],[5,6]]
+   print("Original:",lst)
+   result = lf.autofill_data(lst, fill_value=9.8, type= lf.Fill_Type.NUMBER, update=False)
+   print("mylist=lst, fill_value=9.8, type= \"number\", update=False")
+   print("Result  :",result)
+   print("Original:",lst)
+
+   print("\n----------------------------------------------------------------\n")
+
    print("Original:",lst)
    result = lf.autofill_data(my_list=lst, fill_value=99, type=lf.Fill_Type.STRING, update=True)
-   print("mylist=lst, fill_value=99, type= \"number\", update=True")
+   print("mylist=lst, fill_value=99, type= \"string\", update=True")
    print("Result  :",result)
    print("Original:",lst)
 ----------------------------------------------------------------------------

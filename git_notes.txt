@@ -108,7 +108,7 @@ For all the work                                          For specific work
 git config --global user.name "Migue"                     git config user.name "Migue"
 git config --global user.email "acma.mex@gmail.com"       git config user.email "acma.mex@gmail.com"
 git clone  <path of the url>
-
+git push   -> to push to the repository (provide username and password)
 
 
 

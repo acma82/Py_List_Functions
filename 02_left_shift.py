@@ -32,7 +32,7 @@ print("original:", list_1)
 
 '''
 ----------------------------------------------------------------------------
-   import funlist as lf
+   import list_functions as lf
 
    This function shifts the elements in a list to the left.
 
@@ -51,15 +51,19 @@ list_1 = [[1],[4],[5,6]]
 list_1 = [10,[50],[250],["H"],100]  mix_items                      7
 list_1 = [[1,2,3,4,5,6]]            multiple_items_one_row         8
    
-   Example:
-            print("original: ", list_1)
-            newlist = lf.left_shift(list_1, 2, False)
-            print("new list: ",newlist)
-            print("original again: ", list_1)
+Example:
+   print("original:", list_1, end="")
+   print("   left_shift 2, update=False")
+   newlist = lf.left_shift(list_1, 2, False)
+   print("new list:",newlist)
+   print("original:", list_1)
 
-            print("original: ", list_1)
-            newlist = lf.left_shift(my_list=list_1, shift= 2, update= 1)
-            print("new list: ",newlist)
-            print("original again: ", list_1)
+   print("\n----------------------------------------------------------------\n")
+
+   print("original:", list_1,end="")
+   print("   left_shift 2, update=True")
+   newlist = lf.left_shift(my_list=list_1, shift= 2, update= 1)
+   print("new list:",newlist)
+   print("original:", list_1)
 ----------------------------------------------------------------------------
 '''

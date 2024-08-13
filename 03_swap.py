@@ -48,15 +48,19 @@ lst = [10,[50],[250],["H"],100]  mix_items                      7
 lst = [[1,2,3,4,5,6]]            multiple_items_one_row         8
    
    Example:
-            print("original: ", lst)
-            newlist = lf.swap(my_list=lst, update= 0, pos1= 0, pos2=2)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+   lst = [[1,2],[3,4],[5,6],[7,8]]
+   print("original: ", lst,end="")
+   print("   update=False, pos1=0, pos2=2")
+   newlist = lf.swap(my_list=lst, update= False, pos1= 0, pos2=2)
+   print("new list: ",newlist)
+   print("original: ", lst)
 
+   print("\n----------------------------------------------------------------\n")
 
-            print("original: ", lst)
-            newlist = lf.swap(my_list=lst, update=True, pos1=0, pos2=2)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+   print("original: ", lst,end="")
+   print("   update=true, pos1=3, pos2=0")
+   newlist = lf.swap(my_list=lst, update=True, pos1=3, pos2=0)
+   print("new list: ",newlist)
+   print("original: ", lst)
 ----------------------------------------------------------------------------
 '''

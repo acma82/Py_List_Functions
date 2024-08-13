@@ -33,16 +33,18 @@ print("Original:",lst)
 
 '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
-   fl.autofill_data(list, str/int/float)
+   import list_functions as lf
+   lf.autofill_data(list, str/int/float)
 
    This function will fill all the empty columns from the list.
    fill_chr is the chr to be used to fill those columns. It can be str,
-   int, float, or bool. By default it's str(----).
+   int, float, or bool. By default it's a str type (----).
 
    example:
-            lst = [[9,8,7],[4],[5,6]] 
-            new_list = fl.autofill_data(lst, fill_chr=9.8)
-            print(new_list)
+   print("Original:",lst)
+   result = lf.autofill_data(my_list=lst, fill_value=99, type=lf.Fill_Type.STRING, update=True)
+   print("mylist=lst, fill_value=99, type= \"number\", update=True")
+   print("Result  :",result)
+   print("Original:",lst)
 ----------------------------------------------------------------------------
 '''

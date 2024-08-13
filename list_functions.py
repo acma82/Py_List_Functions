@@ -315,11 +315,11 @@ def get_list_type(my_list):
 #-------------------------------------------------------------------------------------------------------------
 # Right Shift                                                                                                -
 #-------------------------------------------------------------------------------------------------------------
-def right_shift(my_list:list=[], shift:int=0, update:bool=False):
+def right_shift(my_list:list=[], shift:int=0, update:bool=False)->list:
    '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
-   fl.right_shift(list, int, bool)
+   import list_functions as lf
+   lf.right_shift(list, int, bool)
 
    This function shift the elements in a list to the right.
 
@@ -333,16 +333,20 @@ lst = [1,2,3,4,5,6]           lst = [[1,2],[3,4],[5,6]]
 lst = [[1],[4],[5,6]]         lst = [10,[50],[250],["H"],100]
 lst = [[1,2,3,4,5,6]]
    
-   Example:
-            print("original: ", lst)
-            newlist = fl.right_shift(lst, 2, False)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+Example:
+   print("original:  ", list_1, end="")
+   print("   right_shift 2, update=False")
+   newlist = lf.right_shift(list_1, 1, False)
+   print("new list:  ",newlist)
+   print("original:  ", list_1)
 
-            print("original: ", lst)
-            newlist = fl.right_shift(my_list=lst, shift= 2, update= 1)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+   print("\n----------------------------------------------------------------\n")
+
+   print("original:  ", list_1,end="")
+   print("   right_shift 2, update=True")
+   newlist = lf.right_shift(my_list=list_1, shift= 1, update= 1)
+   print("new list:  ",newlist)
+   print("original:  ", list_1)
 ----------------------------------------------------------------------------
    '''
    list_type = get_list_type(my_list)
@@ -411,11 +415,11 @@ lst = [[1,2,3,4,5,6]]
 #-------------------------------------------------------------------------------------------------------------
 # Left Shift                                                                                                 -
 #-------------------------------------------------------------------------------------------------------------
-def left_shift(my_list:list=[], shift=0, update:bool=False):
+def left_shift(my_list:list=[], shift=0, update:bool=False)->list:
    '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
-   fl.left_shift(list, int, bool)
+   import list_functions as lf
+   lf.left_shift(list, int, bool)
 
    This function shift the elements in a list to the left.
 
@@ -428,16 +432,20 @@ lst = [1,2,3,4,5,6]           lst = [[1,2],[3,4],[5,6]]
 lst = [[1],[4],[5,6]]         lst = [10,[50],[250],["H"],100]
 lst = [[1,2,3,4,5,6]]
    
-   Example:
-            print("original: ", lst)
-            newlist = fl.left_shift(lst, 2, False)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+Example:
+   print("original:", list_1, end="")
+   print("   left_shift 2, update=False")
+   newlist = lf.left_shift(list_1, 2, False)
+   print("new list:",newlist)
+   print("original:", list_1)
 
-            print("original: ", lst)
-            newlist = fl.left_shift(my_list=lst, shift= 2, update= 1)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+   print("\n---------------------------------------------------------------------------------\n")
+
+   print("original:", list_1,end="")
+   print("   left_shift 2, update=True")
+   newlist = lf.left_shift(my_list=list_1, shift= 2, update= 1)
+   print("new list:",newlist)
+   print("original:", list_1)
 ----------------------------------------------------------------------------
    '''   
    list_type = get_list_type(my_list)
@@ -507,10 +515,10 @@ lst = [[1,2,3,4,5,6]]
 #-------------------------------------------------------------------------------------------------------------
 # Swap                                                                                                       -
 #-------------------------------------------------------------------------------------------------------------
-def swap(my_list:list=[], pos1=0, pos2=0, update:bool=False):
+def swap(my_list:list=[], pos1=0, pos2=0, update:bool=False)->list:
    '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
+   import list_functions as fl
    fl.swap(list, int, int, bool)
 
    This function swap two elements in a list.
@@ -531,17 +539,21 @@ lst = [1,2,3,4,5,6]           lst = [[1,2],[3,4],[5,6]]
 lst = [[1],[4],[5,6]]         lst = [10,[50],[250],["H"],100]
 lst = [[1,2,3,4,5,6]]
    
-   Example:
-            print("original: ", lst)
-            newlist = fl.swap(my_list=lst, update=0, pos1=0, pos2=2)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+Example:
+   lst = [[1,2],[3,4],[5,6],[7,8]]
+   print("original: ", lst,end="")
+   print("   update=False, pos1=0, pos2=2")
+   newlist = lf.swap(my_list=lst, update= False, pos1= 0, pos2=2)
+   print("new list: ",newlist)
+   print("original: ", lst)
 
+   print("\n----------------------------------------------------------------\n")
 
-            print("original: ", lst)
-            newlist = fl.swap(my_list=lst, update=True, pos1=0, pos2=2)
-            print("new list: ",newlist)
-            print("original again: ", lst)
+   print("original: ", lst,end="")
+   print("   update=true, pos1=3, pos2=0")
+   newlist = lf.swap(my_list=lst, update=True, pos1=3, pos2=0)
+   print("new list: ",newlist)
+   print("original: ", lst)
 ----------------------------------------------------------------------------
    '''
    list_type = get_list_type(my_list)
@@ -623,20 +635,22 @@ lst = [[1,2,3,4,5,6]]
 #-------------------------------------------------------------------------------------------------------------
 # Complete Data List to Make it Rectangular (Rows and Cols)                                                  -
 #-------------------------------------------------------------------------------------------------------------
-def autofill_data(my_list:list, fill_value="----", type:Fill_Type=Fill_Type.STRING, update:bool=False):
+def autofill_data(my_list:list, fill_value="----", type:Fill_Type=Fill_Type.STRING, update:bool=False)->list:
    '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
-   fl.autofill_data(list, str/int/float)
+   import list_functions as lf
+   lf.autofill_data(list, str/int/float)
 
    This function will fill all the empty columns from the list.
-   fill_value is the chr to be used to fill those columns. It can be str,
-   int, float, or bool. By default it's str(----).
+   fill_chr is the chr to be used to fill those columns. It can be str,
+   int, float, or bool. By default it's a str type (----).
 
-   example:
-            lst = [[9,8,7],[4],[5,6]] 
-            new_list = fl.autofill_data(lst, fill_value=9.8)
-            print(new_list)
+example:
+   print("Original:",lst)
+   result = lf.autofill_data(my_list=lst, fill_value=99, type=lf.Fill_Type.STRING, update=True)
+   print("mylist=lst, fill_value=99, type= \"number\", update=True")
+   print("Result  :",result)
+   print("Original:",lst)
 ----------------------------------------------------------------------------
    '''
    list_type = get_list_type(my_list)  

@@ -639,12 +639,17 @@ def autofill_data(my_list:list, fill_value="----", type:Fill_Type=Fill_Type.STRI
    '''
 ----------------------------------------------------------------------------
    import list_functions as lf
-   lf.autofill_data(list, str/int/float)
+   lf.autofill_data(list, str/int/float, update)
 
    This function will fill all the empty columns from the list.
    fill_chr is the chr to be used to fill those columns. It can be str,
    int, float, or bool. By default it's a str type (----).
-
+   
+   Note: autofill only make all the elements in the list to string 
+         when we use type=string, however for number option it only affect
+         the spot that need to be filled leaving the other elements intact
+         in the list.
+         
 example:
    lst = [[9,8,7],[4],[5,6]]
    print("Original:",lst)
@@ -662,8 +667,9 @@ example:
    print("Original:",lst)
 ----------------------------------------------------------------------------
    '''
-   list_type = get_list_type(my_list)  
+   list_type = get_list_type(my_list)
 
+   #def get_new_fill_value():
    if type == "string":
       if isinstance(fill_value, str): new_fill_value = fill_value
       else:                         new_fill_value = str(fill_value)
@@ -677,7 +683,10 @@ example:
             try:
                new_fill_value = float(fill_value)
             except:
-               new_fill_value = 0
+               try:
+                  new_fill_value = complex(fill_value)
+               except:
+                  new_fill_value = 0
 
    else: new_fill_value = str(fill_value)
    
@@ -690,7 +699,10 @@ example:
          for col in range(n_cols):
             try:
                if type == "string":   tempo.append(str(my_list[row][col]))
-               elif type == "number": tempo.append(my_list[row][col])
+               elif type == "number":
+                  # here update code to make all elements from string to number
+                  # when type = "number"
+                  tempo.append(my_list[row][col])
                else: tempo.append(str(my_list[row][col]))
 
             except:
@@ -715,11 +727,12 @@ example:
 #-------------------------------------------------------------------------------------------------------------
 # Transpose List (Converting the rows into cols and cols into rows)                                          -
 #-------------------------------------------------------------------------------------------------------------
-def transpose(my_list:list, autofill=True, fill_value="----", update:bool=False, type:Fill_Type=Fill_Type.STRING)->list:
+def transpose(my_list:list, autofill=True, fill_value="----", type:Fill_Type=Fill_Type.STRING, update:bool=False)->list:
    '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
-   fl.transpose(list, bool, str, bool)
+   import list_functions as lf
+   lf.transpose(my_list, autofill, fill_value, type, update)
+   lf.transpose(list, bool, any, str, bool)
 
    This function get the transpose list.
 
@@ -733,7 +746,9 @@ def transpose(my_list:list, autofill=True, fill_value="----", update:bool=False,
          to fill those spot needed. The fill_value can be replace as 
          needed, by default is set to four dash. 
 
-      
+         Also, autofill only make all the elements in the list to string 
+         when we use type=string, however for number option it only affect
+         the spot that need to be filled leaving the other elements intact.
 Options                          
 lst = [1,2,3,4,5,6]
 lst = [[1,2],[3,4],[5,6],[7,8]]
@@ -741,35 +756,14 @@ lst = [[1,2,3,4,5,6]]
 lst = [[1],[4],[5,6]]
 lst = [5,[50,40],45]
 lst = [[5],6,40,[45]]
+lst = [[1],[4,"t"],[5,6,"dos"]]
 
-   Example:
-         print("original_list: ", lst)
-         fun.print_fancy_list(lst)
+print("original:", lst)
+trans_lst = lf.transpose(my_list=lst, autofill=True, fill_value=0.5, type=lf.Fill_Type.NUMBER, update=False)
+print("New     :",trans_lst)
 
-         transpose_l1 = fl.transpose(lst, update= True, autofill=True)
-         
-         print("transpose_l1 : ", transpose_l1)
-         fun.print_fancy_list(transpose_l1)
-
-         print("original_list: ", lst)
-         fun.print_fancy_list(lst)
-
-         transpose_l2 = fl.transpose(transpose_l1)
-         print("transpose_l2 : ", transpose_l2)
-         fun.print_fancy_list(transpose_l2)
-
-
-         transpose_l3 = fl.transpose(transpose_l2)
-         print("transpose_l3 : ", transpose_l3)
-         fun.print_fancy_list(transpose_l3)
 ----------------------------------------------------------------------------
    '''
-   # tempo_list = []
-   # if type == "string":  tempo_list = num_to_str(my_list=mylist, fill_value=fill_value, update=False)
-   # elif type == "number":tempo_list = str_to_num(my_list=mylist, fill_value=fill_value, update=False)
-   # else:                 tempo_list = num_to_str(my_list=mylist, fill_value=fill_value, update=False)
-   # 
-   
    transpose_list = []
    list_type = get_list_type(my_list)
 
@@ -818,27 +812,22 @@ lst = [[5],6,40,[45]]
       #--------------------------------------------------------------      
            
       lengths = []
-      for l in fill_list: # my_list:        # finding the smallest
+      for l in fill_list:           # finding the smallest
          lengths.append(len(l))    
     
       smaller = min(lengths)
     
-      #ctrl = 0
-      for item in fill_list: # my_list:      
+      for item in fill_list:
          if len(item) != smaller:
-            #ctrl = 1
             break
 
       for i in range(smaller): 
          row =[]
-         for item in fill_list: # my_list:
+         for item in fill_list:
             # appending to new list with values and index positions
             # i contains index position and item contains values
             row.append(item[i])
          transpose_list.append(row)
-      #if ctrl == 1: print(some data was lost,)
-      #return transpose_list
-   
 
    if update == False:
       pass
@@ -875,9 +864,12 @@ lst = [[9,8,7],[4],[5,6]]          8
 lst = [10,[50],[250],["H"],100]    9
 lst = [[1,2,3,4,5,6]]              10
    
-   Example:
-            rows, cols = fl.dimensions(lst)
-            print("rows: ", rows, "     cols: ", cols)
+Example:
+   rows, cols = fl.dimensions(lst,""max)
+   print("rows: ", rows, "     cols: ", cols)
+   
+   rows, cols = lf.dimensions(my_list=lst, option=lf.Length_Col.MIN)
+   print("rows: ", rows, "     cols: ", cols)
 ----------------------------------------------------------------------------
    '''
    n_rows = 0; n_cols = 0

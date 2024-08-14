@@ -1,58 +1,42 @@
-import HotListFuns as fp
-fun = fl.FancyList()
+import list_functions as lf
 
-# Options                          # Results                           Cases
-# lst = "hello"                    # incorrect_variable_type             1
-# lst = []                         # empty_list                          2
-# lst = [5]                        # one_item_no_row                     3
-# lst = [[1]]                      # one_item_one_row                    4
-# lst = [1,2,3,4,5,6]              # multiple_items_no_row               5     this one
-# lst = [4,5]
-# lst = [[1,2],[3,4],[5,6],[7,8]]  # multiple_items_multiple_rows        6       this one
-lst = [[1],[4],[5,6]]                                                          #this one
-# lst = [10,[50],[250],["H"],100]  # mix_items                           7
-# lst = [5,[50,40],45] 
-# lst = [[5],6,40,[45]]                                                  #        this one
-# lst = [[1,2,3,4,5,6]]              # multiple_items_one_row              8
+msg = f'''
+            Inputs                     Outputs                                       Cases
+   list_1 = "hello"                    []                                              1
+   list_1 = []                         []                                              2
+   list_1 = [5]                        [[5]]                                           3
+   list_1 = [[1]]                      [1]                                             4
+   list_1 = [1,2,3,4,5,6]              [[1],[2],[3],[4],[5],[6]]                       5
+   list_1 = [[1,2],[3,4],[5,6]]        [[1,3,5],[2,4,6]           ]                    6
+   list_1 = [[1],[4],[5,6]]            [[1,4,5],[fill_value,fill_value,6]]
+                                       [[1,4,5]] -> autofill = False
+                                       [[1,4,5]] -> autofill = False, type=\'string\'
+   list_1 = [10,[50],[250],["H"],100]  [[10],[[50]],[[250]],[["H"]],[100]]             7
 
-print("original_list: ", lst)
-fun.print_fancy_list(lst)
-
-'''
-transpose, when autofill is false it will cut the data
-when autofill is true it will fill the empty spot with the fill_chr 
-'''
-
-#transpose_l1 = fl.transpose(lst, update= True, autofill=False)
-transpose_l1 = fl.transpose(lst, update= True, autofill=True, fill_chr="910", type="number")
-print("transpose_l1 : ", transpose_l1)
-fun.print_fancy_list(transpose_l1)
-
-print("original_list: ", lst)
-fun.print_fancy_list(lst)
-
-transpose_l2 = fl.transpose(transpose_l1)
-print("transpose_l2 : ", transpose_l2)
-fun.print_fancy_list(transpose_l2)
+   list_1 = [[1,2,3,4,5,6]]            [1, 2, 3, 4, 5, 6]                              8 
+   list_1 = [1, 2, 3, 4, 5, 6]         [[1], [2], [3], [4], [5], [6]]
+   list_1 = [[1],[2],[3],[4],[5],[6]]  [[1,2,3,4,5,6]]
+   '''
+print(msg)
+a = 6+2j
+print(a)
+# lst = "hello"        lst = []        lst = [5]        lst = [[1]]
+# lst = [1,2,3,4,5,6]  ls[1, 2, 3, 4, 5, 6]t = [[1,2],[3,4],[5,6]]        lst = [[1],[4],[5,6]]
+lst = [[1],[4,"t"],[5,6,"dos"]]
+print("original:", lst)
+#trans_lst = lf.transpose(my_list=lst, autofill=True, fill_value=0.5, type=lf.Fill_Type.NUMBER, update=False)
+#trans_lst = lf.transpose(my_list=lst, autofill=True, fill_value="1", type="string", update=False)
+trans_lst = lf.transpose(my_list=lst, autofill=True, fill_value=a, type="number", update=False)
+print("New     :",trans_lst)
 
 
-transpose_l3 = fl.transpose(transpose_l2, type = "number")
-print("transpose_l3 : ", transpose_l3)
-fun.print_fancy_list(transpose_l3)
-
-print("original_list: ", lst)
-fun.print_fancy_list(lst)
-
-
-listita = [["Miguel", "Aguilar", "Cuesta"],[1,2,3],[7,9]]
-print(listita)
-print(fl.transpose(listita, True, "100", False, "number"))
 
 
 '''
 ----------------------------------------------------------------------------
-   import fancylist as fl
-   fl.transpose(list, bool, str, bool)
+   import list_functions as lf
+   lf.transpose(my_list, autofill, fill_value, type, update)
+   lf.transpose(list, bool, any, type, bool)
 
    This function get the transpose list.
 
@@ -62,11 +46,14 @@ print(fl.transpose(listita, True, "100", False, "number"))
 
    Note: When the list is not square or rectangular, the autofill will be
          used. If the autofill is set to False, some data will be lost.
-         If the autofill is set to True, the fill_chr will be used
-         to fill those spot needed. The fill_chr can be replace as 
+         If the autofill is set to True, the fill_value will be used
+         to fill those spot needed. The fill_value can be replace as 
          needed, by default is set to four dash. 
 
-      
+         Also, autofill only make all the elements in the list to string 
+         when we use type=string, however for number option it only affect
+         the spot that need to be filled leaving the other elements intact
+         in the list.
 Options                          
 lst = [1,2,3,4,5,6]
 lst = [[1,2],[3,4],[5,6],[7,8]]
@@ -75,25 +62,5 @@ lst = [[1],[4],[5,6]]
 lst = [5,[50,40],45]
 lst = [[5],6,40,[45]]
 
-   Example:
-         print("original_list: ", lst)
-         fun.print_fancy_list(lst)
-
-         transpose_l1 = fl.transpose(lst, update= True, autofill=True)
-         
-         print("transpose_l1 : ", transpose_l1)
-         fun.print_fancy_list(transpose_l1)
-
-         print("original_list: ", lst)
-         fun.print_fancy_list(lst)
-
-         transpose_l2 = fl.transpose(transpose_l1)
-         print("transpose_l2 : ", transpose_l2)
-         fun.print_fancy_list(transpose_l2)
-
-
-         transpose_l3 = fl.transpose(transpose_l2)
-         print("transpose_l3 : ", transpose_l3)
-         fun.print_fancy_list(transpose_l3)
 ----------------------------------------------------------------------------
-'''
+   '''

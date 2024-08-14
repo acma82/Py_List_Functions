@@ -1,4 +1,4 @@
-import HotListFuns as fp
+import list_functions as lf
 
 # Options                          # Results                           Cases
 # lst = "hello"                    # incorrect_variable_type             1
@@ -14,7 +14,16 @@ lst = [[9,8,7],[4],[5,6]]
 # lst = [[5],6,40,[45]]                                                  
 # lst = [[1,2,3,4,5,6]]              # multiple_items_one_row            8
 
-rows, cols = fl.dimensions(lst, len_col="max")
+rows, cols = lf.dimensions(lst, "max")
+print("rows: ", rows, "     cols: ", cols)
+rows, cols = lf.dimensions(my_list=lst, option=lf.Length_Col.MAX)
+print("rows: ", rows, "     cols: ", cols)
+
+
+print()
+rows, cols = lf.dimensions(lst, "min")
+print("rows: ", rows, "     cols: ", cols)
+rows, cols = lf.dimensions(my_list=lst, option=lf.Length_Col.MIN)
 print("rows: ", rows, "     cols: ", cols)
 
 '''
@@ -23,6 +32,8 @@ print("rows: ", rows, "     cols: ", cols)
 
    This function return the number of rows and cols in a list.
    It will take the longest number for the columns as the case 7 or 8.
+   However, it can be adjusted to use the smallest number for the columns.
+
       
 Options                          Cases
 lst = "hello"                      1

@@ -4,7 +4,7 @@ import list_functions as lf
 # Bool, Integer, Float, Complex, and String                                          -
 #-------------------------------------------------------------------------------------
 print("\033[48;5;99m                                                           \033[0m")
-print("\033[1;48;5;4;38;5;231m  BOOL  \033[0m")
+print("  BOOL")
 b = False; result = lf.data_to_list(b)
 print(result)
 print()

@@ -1,61 +1,28 @@
 import copy
-import HotListFuns as fp
+import list_functions as lf
 
-# Options                          Results                           Cases
-lst = "hello"                    # incorrect_variable_type             1
-# lst = []                         # empty_list                        2
-# lst = [5]                        # one_item_no_row                   3
-# lst = [[1]]                      # one_item_one_row                  4
-# lst = [1,2,3,4,5,6]              # multiple_items_no_row             5
-# lst = [4,5]
+msg = f'''
+   Options                             Results                           Cases
+   list_1 = "hello"                    incorrect_variable_type             1
+   list_1 = []                         empty_list                          2
+   list_1 = [5]                        one_item_no_row                     3
+   list_1 = [[1]]                      one_item_one_row                    4
+   list_1 = [1,2,3,4,5,6]              multiple_items_no_row               5
+   list_1 = [[1,2],[3,4],[5,6]]        multiple_items_multiple_rows        6
+   list_1 = [[1],[4],[5,6]]
+   list_1 = [10,[50],[250],["H"],100]  mix_items                           7
+   list_1 = [[1,2,3,4,5,6]]            multiple_items_one_row              8 
+   '''
+print(msg)
 
-# lst = [[1,2],[3,4],[5,6],[7,8]]  # multiple_items_multiple_rows      6
-# lst = [[9,8,7,7],[4],[5,6]]                                           
-# lst = [10,[50],[250],["H"],100]  # mix_items                         7
-# lst = [5,[50,40],45] 
-# lst = [[5],6,40,[45]]                                                 
-# lst = [[1,2,3,4,5,6]]             # multiple_items_one_row           8
-
-
-# def num2str(my_list, fill_chr, update=False):
-#    tempo = []; str_list = []
-   
-#    n_rows = len(my_list)
-#    n_cols = 0
-#    for n in my_list:
-#       if len(n) > n_cols:
-#          n_cols = len(n)
-
-#    for row in range(n_rows):
-#       for col in range(n_cols):
-#          try:
-#             tempo.append(str(my_list[row][col]))
-#          except:
-#             tempo.append(str(fill_chr))
-#       str_list.append(tempo)
-#       tempo = []
+lst = [[1,2],[3,4],[5,6],[0]]
+print("Original:",lst)
+# result = lf.num_to_str(lst, "199", False)
+result = lf.num_to_str(my_list=lst, fill_value=None, update=True)
+print("Result  :",result)
+print("Original:",lst)
 
 
-   
-
-#    if update == True:
-#       my_list.clear()
-#       [my_list.append(n) for n in str_list]
-#    else:
-#       pass
- 
-#    return str_list
-
-# print(lst)
-# resultado = num2str(lst, "99", True)
-# print(resultado)
-# print(lst)
-
-print(lst)
-result = fl.num2str(lst, 99, False)
-# result = fl.num2str(lst, 99, True)
-print(result)
-print(lst)
 
 '''
 ----------------------------------------------------------------------------

@@ -635,62 +635,35 @@ Example:
 #-------------------------------------------------------------------------------------------------------------
 # Complete Data List to Make it Rectangular (Rows and Cols)                                                  -
 #-------------------------------------------------------------------------------------------------------------
-def autofill_data(my_list:list, fill_value="----", type:Fill_Type=Fill_Type.STRING, update:bool=False)->list:
+def autofill_data(my_list:list, fill_value="----", update:bool=False)->list:
    '''
 ----------------------------------------------------------------------------
    import list_functions as lf
    lf.autofill_data(list, str/int/float, update)
 
    This function will fill all the empty columns from the list.
-   fill_chr is the chr to be used to fill those columns. It can be str,
+   fill_value is the chr to be used to fill those columns. It can be str,
    int, float, or bool. By default it's a str type (----).
    
-   Note: autofill only make all the elements in the list to string 
-         when we use type=string, however for number option it only affect
-         the spot that need to be filled leaving the other elements intact
-         in the list.
          
 example:
    lst = [[9,8,7],[4],[5,6]]
    print("Original:",lst)
-   result = lf.autofill_data(lst, fill_value=9.8, type= lf.Fill_Type.NUMBER, update=False)
-   print("mylist=lst, fill_value=9.8, type= \"number\", update=False")
+   result = lf.autofill_data(lst, fill_value=9.8, update=False)
+   print("mylist=lst, fill_value=9.8, update=False")
    print("Result  :",result)
    print("Original:",lst)
 
    print("\n----------------------------------------------------------------\n")
 
    print("Original:",lst)
-   result = lf.autofill_data(my_list=lst, fill_value=99, type=lf.Fill_Type.STRING, update=True)
+   result = lf.autofill_data(my_list=lst, fill_value=99, update=True)
    print("mylist=lst, fill_value=99, type= \"string\", update=True")
    print("Result  :",result)
    print("Original:",lst)
 ----------------------------------------------------------------------------
    '''
    list_type = get_list_type(my_list)
-
-   #def get_new_fill_value():
-   if type == "string":
-      if isinstance(fill_value, str): new_fill_value = fill_value
-      else:                         new_fill_value = str(fill_value)
-
-   elif type == "number":
-      if isinstance(fill_value, int) or isinstance (fill_value, float): new_fill_value = fill_value      
-      else: 
-         try:
-            new_fill_value = int(fill_value)
-         except:
-            try:
-               new_fill_value = float(fill_value)
-            except:
-               try:
-                  new_fill_value = complex(fill_value)
-               except:
-                  new_fill_value = 0
-
-   else: new_fill_value = str(fill_value)
-   
-
    if list_type == "multiple_items_multiple_rows":
       n_rows, n_cols = dimensions(my_list)
       tempo = []; matrix_update = []
@@ -698,23 +671,14 @@ example:
       for row in range(n_rows):
          for col in range(n_cols):
             try:
-               if type == "string":   tempo.append(str(my_list[row][col]))
-               elif type == "number":
-                  # here update code to make all elements from string to number
-                  # when type = "number"
-                  tempo.append(my_list[row][col])
-               else: tempo.append(str(my_list[row][col]))
-
+               tempo.append(my_list[row][col])
             except:
-               if type == "string":   tempo.append(str(new_fill_value))
-               elif type == "number": tempo.append(new_fill_value)
-               else:                  tempo.append(str(new_fill_value))
+               tempo.append(fill_value)
                
 
          matrix_update.append(tempo)
          tempo = []
          
-      
       if update == True:
          my_list.clear()
          [my_list.append(n) for n in matrix_update]
@@ -997,37 +961,38 @@ def num_to_str(my_list:list=[], fill_value="----", update:bool=False)->list:
 # Convert a List to Digit Where Possible                                                                     -
 #-------------------------------------------------------------------------------------------------------------
 def str_to_num(my_list:list=[], fill_value=0, update:bool=False)->list:
-   def conver2number(n):
-      try:
-         numb = int(n)
+   def get_number(x):
+      try: 
+         numb = int(x)
          return numb          # return "integer"
       except:
          try:
-            numb = float(n)
+            numb = float(x)
             return numb       # return "float"
          except:
-            if isinstance(fill_value, int):
-               return int(fill_value)
-            elif isinstance(fill_value, float):
-               return float(fill_value)
-            else:
-               try:
-                  numb = int(fill_value)
-                  return numb
-               except:
-                  try:
-                     numb = float(fill_value)
-                     return numb
-                  except:
-                     return 0
-            
+            try:
+               numb = complex(x)
+               return numb
+            except:
+               return "no_number_type"
+
+   def conver2number(n):
+      numb = get_number(n)
+      if numb != "no_number_type":
+         return numb
+      elif isinstance(fill_value, int) or isinstance(fill_value, float) or isinstance(fill_value, complex):
+         numb = get_number(fill_value)
+         return numb
+      else:
+         return 0
+               
    # num_to_str is already using the send_msg function         
    #string_list = num_to_str(my_list=my_list, fill_value=fill_value, update=False)
    tempo = []; num_list = []
    list_type = get_list_type(my_list)
    
    if list_type == "incorrect_variable_type":
-      return None
+      return [] #None
    
    if list_type == "empty_list":
       return my_list

@@ -16,20 +16,27 @@ print(msg)
 
 lst = [[9,8,7],[4],[5,6]]
 print("Original:",lst)
-result = lf.autofill_data(lst, fill_value=9.8, type= lf.Fill_Type.NUMBER, update=False)
-print("mylist=lst, fill_value=9.8, type= \"number\", update=False")
+result = lf.autofill_data(lst, fill_value=9.8, update=False)
+print("mylist=lst, fill_value=9.8, update=False")
 print("Result  :",result)
 print("Original:",lst)
 
 print("\n---------------------------------------------------------------------------------\n")
 
 print("Original:",lst)
-result = lf.autofill_data(my_list=lst, fill_value=99, type=lf.Fill_Type.STRING, update=True)
-print("mylist=lst, fill_value=99, type= \"string\", update=True")
+result = lf.autofill_data(my_list=lst, fill_value=99, update=True)
+print("mylist=lst, fill_value=99, update=True")
 print("Result  :",result)
 print("Original:",lst)
 
 
+print("\n---------------------------------------------------------------------------------\n")
+lst = [[1,2],['miguel','angel'],[1]]
+print("Original:",lst)
+result = lf.autofill_data(my_list=lst, fill_value=99, update=True)
+print("mylist=lst, fill_value=99, update=True")
+print("Result  :",result)
+print("Original:",lst)
 
 '''
 ----------------------------------------------------------------------------

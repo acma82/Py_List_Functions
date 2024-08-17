@@ -37,31 +37,11 @@ lst = ["-10.5","-40",["50"],[250],["H"],"10"] # mix_items                       
 print("original: ", lst)
 number_list = lf.str_to_num(my_list=lst, fill_value="0.1", update=False)
 print("result:",number_list)
+print("original: ", lst)
 
-# def number(n):
-#    try:
-#       numb = int(n)
-#       return numb
-#       return "integer"
-#    except:
-#       try:
-#          numb = float(n)
-#          return numb
-#          return "float"
-#       except:
-#          return 0
-#          return "string"
+print("\n---------------------------------------------------------------------------------\n")
 
-# result = number("-5") + 1
-# print(result)
-# mensaje = fl.ins_space(4)+"Hello!"+fl.ins_space(4)
-# fl.send_msg(mensaje, 32, 0, True, 4, 2)
-# print()
-# fl.send_msg(mensaje, 1, 234, True, 4, 2)
-# fl.send_msg(mensaje, 1, 15, True, 4, 2)
-# print(lst)
-# result = fl.str2num(my_list=lst, fill_chr=99, update=False)
-# print(result)
-# print(lst)
-# result = fl.str2num(my_list=lst, update=False)
-# print(result)
+print("original: ", lst)
+number_list = lf.str_to_num(my_list=lst, fill_value="0.1", update=True)
+print("result:",number_list)
+print("original: ", lst)

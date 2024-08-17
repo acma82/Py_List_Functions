@@ -15,7 +15,7 @@ msg = f'''
    '''
 print(msg)
 
-lst = [[5],6,40,[45]]
+lst = [[5],6,40,[45],8,[45]]
 
 print("Original:",lst)
 result = lf.replace(my_list=lst, ref_value=[45], new_value=0.85, update=False)
@@ -25,7 +25,7 @@ print("Original:",lst)
 print("\n---------------------------------------------------------------------------------\n")
 
 print("Original:",lst)
-result = lf.replace(my_list=lst, ref_value=40, new_value=0.85, update=True)
+result = lf.replace(my_list=lst, ref_value=[45], new_value=0.85, update=True)
 print("Result  :",result,end="  "); print("mylist=lst, ref=45, new_value=0.85, update=False")
 print("Original:",lst)
 

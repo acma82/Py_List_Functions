@@ -1147,10 +1147,7 @@ def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type:Fill_Type=Fi
    list_type = get_list_type(my_list)
 
    if list_type == "incorrect_variable_type":
-      print()
-      print(msg=" Only For List Type Variable ",indent=4)
-      print()
-      return my_list
+      return []
    
    elif list_type == "empty_list":
       return my_list
@@ -1202,24 +1199,30 @@ def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type:Fill_Type=Fi
 
       # Done [["Hello"],["bye"],["good"]] or [["Hello","mio"],["bye"],["good","hh"]]
    elif list_type == "multiple_items_multiple_rows":
-      complete_list = autofill_data(my_list=my_list, fill_value=fill_value, type=type, update=False)
+      complete_list = autofill_data(my_list=my_list, fill_value=fill_value, update=False)
       n_rows, n_cols = dimensions(complete_list, "max")
-
+      
       if ref_col >= n_cols:
          print()
          print(" ref_col out of range...! ")
          print()
          return my_list 
-
+      
       else:
+
          if type == "string":
-            new_list = num_to_str(my_list=my_list, update=False)
-            sorted_list = [new_list[0]] + sorted(complete_list[1:], key=lambda x: x[ref_col])
+            new_list = num_to_str(my_list=complete_list, update=False)
+            sorted_list = [new_list[0]] + sorted(new_list[1:], key=lambda x: x[ref_col])
             #sorted_list = [my_list[0]] + sorted(complete_list[1:], key=lambda x: str(x[ref_col]))
          elif type == "number":
-            sorted_list = [my_list[0]] + sorted(complete_list[1:], key=lambda x: (x[ref_col]))
+            header_row = complete_list.pop(0)
+            new_list = str_to_num(my_list=complete_list, update=False)
+            new_list.insert(0,header_row)
+            sorted_list = [new_list[0]] + sorted(new_list[1:], key=lambda x: x[ref_col])
+
          else:
-            sorted_list = [my_list[0]] + sorted(complete_list[1:], key=lambda x: str(x[ref_col]))
+            new_list = num_to_str(my_list=my_list, update=False)
+            sorted_list = [new_list[0]] + sorted(complete_list[1:], key=lambda x: x[ref_col])
 
          if update == True:
             my_list.clear()

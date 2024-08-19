@@ -1142,7 +1142,22 @@ def replace(my_list:list=[], ref_value="---", new_value="----", update:bool=Fals
 # def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type="string", update=False)->list:
 # my_list:list[]   this discribe the type of input in the function
 # ->list           this show the return type of the function
-def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type:Fill_Type=Fill_Type.STRING, update:bool=False)->list:
+def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type:Fill_Type=Fill_Type.STRING, reverse_order:bool=False, update:bool=False)->list:
+   def get_order_only_horizontal(in_list):
+      tempo_list = []
+      print("starting: ", in_list)
+      if type == "string":   [tempo_list.append(str(n)) for n in in_list]
+      elif type == "number": tempo_list = str_to_num(my_list=in_list, fill_value=fill_value, update=False)
+      else:                  [tempo_list.append(str(n)) for n in in_list]
+      
+      sorted_list = sorted(tempo_list)
+      if reverse_order == False:
+         pass
+      elif reverse_order == True:
+         list.reverse(sorted_list)
+      print("result: ",sorted_list)
+      return sorted_list
+   
    
    list_type = get_list_type(my_list)
 
@@ -1158,43 +1173,25 @@ def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type:Fill_Type=Fi
    elif list_type == "one_item_one_row": # Done [["dato"]]
       return my_list
    
-   elif list_type == "multiple_items_no_row": # Done ["Hello","bye","good"]
-      
-      tempo_list = []      
-      if type == "string":   [tempo_list.append(str(n)) for n in my_list]
-      elif type == "number": tempo_list = str_to_num(my_list=my_list, fill_value=fill_value, update=False)
-      else:                  [tempo_list.append(str(n)) for n in my_list]
+   elif list_type == "multiple_items_no_row": # multiple_items_no_row -> ["Hello","bye","good"]
+      sorted_list = get_order_only_horizontal(my_list)
 
-      sorted_list = sorted(tempo_list)
+      if update == True:
+         my_list.clear()
+         [my_list.append(n) for n in sorted_list]
+      
+      return sorted_list
+   
+
+   elif list_type == "multiple_items_one_row": # Done [["Hello","bye","good"]]
+      tempo = []
+      [tempo.append(n) for n in my_list[0]]      
+      sorted_list = get_order_only_horizontal(tempo)
 
       if update == True:
          my_list.clear()
          [my_list.append(n) for n in sorted_list]
 
-      return sorted_list
-
-   elif list_type == "multiple_items_one_row": # Done [["Hello","bye","good"]]
-      tempo_list = []; tempo = []
-      if type == "string":
-         [tempo.append(str(n)) for n in my_list[0]]
-         tempo_list.append(tempo)
-
-      elif type == "number":
-         tempo_list = str_to_num(my_list=my_list, fill_value=fill_value, update=False)
-
-      else:
-         [tempo.append(str(n)) for n in my_list[0]]
-         tempo_list.append(tempo)
-      
-
-      sorted_list = sorted(tempo_list[0])
-
-      if update == True:
-         my_list.clear()
-         tempo_list = []
-         [tempo_list.append(n) for n in sorted_list]
-         my_list.append(tempo_list)
-   
       return [sorted_list]
 
       # Done [["Hello"],["bye"],["good"]] or [["Hello","mio"],["bye"],["good","hh"]]
@@ -1240,7 +1237,7 @@ def sort_by_col(my_list:list=[], ref_col=0, fill_value="----", type:Fill_Type=Fi
 #-------------------------------------------------------------------------------------------------------------
 # Write CSV File                                                                                             -
 #-------------------------------------------------------------------------------------------------------------
-def write_csv_file(my_list=["None"], file_path="fancylist")->str:
+def write_csv_file(my_list:list=["None"], file_path:str="CSV_List")->str:
    current_path = os.getcwd()
    ext = ""
    for l in file_path[-4:]:
@@ -1251,12 +1248,17 @@ def write_csv_file(my_list=["None"], file_path="fancylist")->str:
    else:
       file_name = file_path + ".csv"
 
+   list_type = get_list_type(my_list)
+   
    #with open(file_path + ".csv", "w", newline="") as file:
    with open(file_name, "w", newline="") as file:
       writer = csv.writer(file)
-
-      for row in range(len(my_list)):
-         writer.writerow([col for col in my_list[row]])
+      if (list_type == "one_item_one_row" or list_type == "multiple_items_one_row" or\
+          list_type == "multiple_items_multiple_rows"):
+         for row in range(len(my_list)):
+            writer.writerow([col for col in my_list[row]])
+      else:
+         writer.writerow([col for col in my_list])
 
    if ("/" in file_name): file = file_name
    else:                  file = current_path+"/"+file_name
@@ -1267,7 +1269,7 @@ def write_csv_file(my_list=["None"], file_path="fancylist")->str:
 #-------------------------------------------------------------------------------------------------------------
 # Read CSV File                                                                                              -
 #-------------------------------------------------------------------------------------------------------------
-def read_csv_file(file_path="fancylist")->list:
+def read_csv_file(file_path="CSV_List")->list:
    rows = []; ext = ""
    for l in file_path[-4:]:
       ext += l
@@ -1281,4 +1283,13 @@ def read_csv_file(file_path="fancylist")->list:
       #header = next(reader)
       for row in reader:
          rows.append(row)
-   return rows
+
+   list_type = get_list_type(rows)
+   csv_list = []
+   if (list_type == "one_item_one_row" or list_type == "multiple_items_one_row"):
+      for n in rows:
+         for m in n: 
+            csv_list.append(m)
+   else:
+      csv_list = rows
+   return csv_list

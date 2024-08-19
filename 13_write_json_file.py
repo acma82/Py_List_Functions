@@ -13,5 +13,21 @@ msg = f'''
    '''
 print(msg)
 
-my_lista = lf.read_csv_file("/home/acma/Desktop/data")
-print(my_lista)
+# lst = "hello"
+# lst = []
+# lst = ["Miguel"]
+# lst = [["Miguel"]]
+
+# lst = [1,2,3,4]
+#lst = [[1,2,3,4]]
+
+# lst = [[1,2],[3,4]]
+# lst = [[1],[4],[5,6]]
+# lst = [[1],[4],[5,6]]
+
+lst = [["Name","Last","Age"],["Miguel","AC",42],["Alex","Call",32],["Amilcar","Burelo",43]]
+
+# lst = [10,[50],[250],["H"],100]
+
+path=lf.write_json_file(lst,"/home/acma/Desktop/data")
+print(path)

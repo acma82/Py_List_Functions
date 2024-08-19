@@ -1,7 +1,9 @@
 # Note: Use Python 3.12 or above
-import enum
-import csv
 import os
+import csv
+import enum
+import json
+
 
 class Layout(enum.StrEnum):
    HORIZONTAL = "horizontal"
@@ -1243,10 +1245,8 @@ def write_csv_file(my_list:list=["None"], file_path:str="CSV_List")->str:
    for l in file_path[-4:]:
       ext += l
 
-   if ext == ".csv":
-      file_name = file_path
-   else:
-      file_name = file_path + ".csv"
+   if ext == ".csv": file_name = file_path
+   else:             file_name = file_path + ".csv"
 
    list_type = get_list_type(my_list)
    
@@ -1269,7 +1269,7 @@ def write_csv_file(my_list:list=["None"], file_path:str="CSV_List")->str:
 #-------------------------------------------------------------------------------------------------------------
 # Read CSV File                                                                                              -
 #-------------------------------------------------------------------------------------------------------------
-def read_csv_file(file_path="CSV_List")->list:
+def read_csv_file(file_path:str="CSV_List")->list:
    rows = []; ext = ""
    for l in file_path[-4:]:
       ext += l
@@ -1278,11 +1278,14 @@ def read_csv_file(file_path="CSV_List")->list:
    else:             file_name = file_path + ".csv"
 
    #with open(file_path + ".csv", "r", newline="") as file:
-   with open(file_name, "r", newline="") as file:
-      reader = csv.reader(file)
-      #header = next(reader)
-      for row in reader:
-         rows.append(row)
+   try:
+      with open(file_name, "r", newline="") as file:
+      
+         reader = csv.reader(file)
+         for row in reader:
+            rows.append(row)
+   except:
+      rows = ["No Data or Not File"]
 
    list_type = get_list_type(rows)
    csv_list = []
@@ -1293,3 +1296,44 @@ def read_csv_file(file_path="CSV_List")->list:
    else:
       csv_list = rows
    return csv_list
+
+
+#-------------------------------------------------------------------------------------------------------------
+# Write JSON File                                                                                             -
+#-------------------------------------------------------------------------------------------------------------
+def write_json_file(my_list:list=["None"], file_path:str="JSON_List")->str:
+   current_path = os.getcwd()
+   ext = ""
+   for l in file_path[-4:]:
+      ext += l
+
+   if ext == ".json": file_name = file_path
+   else:             file_name = file_path + ".json"
+
+   with open(file_name, "w") as data_file:
+      json.dump(my_list, data_file, indent=4)
+
+   if ("/" in file_name): file = file_name
+   else:                  file = current_path+"/"+file_name
+
+   return file
+
+
+#-------------------------------------------------------------------------------------------------------------
+# Read JSON File                                                                                              -
+#-------------------------------------------------------------------------------------------------------------
+def read_json_file(file_path:str="JSON_List")->list:
+   rows = []; ext = ""
+   for l in file_path[-4:]:
+      ext += l
+
+   if ext == ".json": file_name = file_path
+   else:             file_name = file_path + ".json"
+
+   try:
+      with open(file_name, "r") as data_file:
+         data = json.load(data_file)
+   except:
+      data = ["No Data or Not File"]
+
+   return data

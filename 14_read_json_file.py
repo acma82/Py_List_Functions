@@ -13,5 +13,5 @@ msg = f'''
    '''
 print(msg)
 
-my_lista = lf.read_csv_file("/home/acma/Desktop/data")
-print(my_lista)
+path=lf.read_json_file("/home/acma/Desktop/data")
+print(path)

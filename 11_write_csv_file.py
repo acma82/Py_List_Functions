@@ -26,6 +26,6 @@ lst = []
 
 # lst = [["Name","Last","Age"],["Miguel","AC",42],["Alex","Call",32],["Amilcar","Burelo",43]]
 
-path=lf.write_csv_file(lst)
+path=lf.write_csv_file(lst, "/home/acma/Desktop/data")
 print(path)
 

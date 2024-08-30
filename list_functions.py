@@ -1323,7 +1323,7 @@ def write_json_file(my_list:list=["None"], file_path:str="JSON_List")->str:
 # Read JSON File                                                                                              -
 #-------------------------------------------------------------------------------------------------------------
 def read_json_file(file_path:str="JSON_List")->list:
-   rows = []; ext = ""
+   ext = ""
    for l in file_path[-4:]:
       ext += l
 
